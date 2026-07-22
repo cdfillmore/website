@@ -37,12 +37,12 @@ export const site = {
     },
   ],
   timeline: [
-    { period: "May — Nov 2026", role: "Software engineering intern", place: "Snapchat Spectacles · Vienna" },
-    { period: "2019 — 2025", role: "Ph.D. in Mathematics", place: "Institute of Science and Technology Austria" },
-    { period: "2020 — 2024", role: "Teaching assistant", place: "Institute of Science and Technology Austria" },
-    { period: "2016 — 2018", role: "M.Sc. in Mathematics", place: "University of Bonn" },
-    { period: "2014 — 2015", role: "Trade statistician", place: "Australian Department of Foreign Affairs and Trade" },
-    { period: "2010 — 2013", role: "B.Sc. (Honours) in Mathematics", place: "University of Queensland" },
+    { period: "May — Present", role: "Software engineering intern", place: "Snapchat Spectacles · Vienna" },
+    { period: "2019 — 2025", role: "Ph.D. in Mathematics", place: "Institute of Science and Technology Austria · Klosterneuburg" },
+    { period: "2020 — 2024", role: "Teaching assistant", place: "Institute of Science and Technology Austria · Klosterneuburg" },
+    { period: "2016 — 2018", role: "M.Sc. in Mathematics", place: "University of Bonn · Bonn" },
+    { period: "2014 — 2015", role: "Trade statistician", place: "Australian Department of Foreign Affairs and Trade · Canberra" },
+    { period: "2010 — 2013", role: "B.Sc. (Honours) in Mathematics", place: "University of Queensland · Brisbane" },
   ],
 } as const;
 
