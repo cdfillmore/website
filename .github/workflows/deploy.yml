@@ -26,7 +26,8 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: npm run build
         env:
-          SITE_URL: https://${{ github.repository_owner }}.github.io
+          # site/base are derived from GITHUB_REPOSITORY in astro.config.mjs
+          GITHUB_REPOSITORY: ${{ github.repository }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

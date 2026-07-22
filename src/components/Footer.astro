@@ -12,7 +12,7 @@ import { assetHref } from "../lib/assetHref";
       <span>Reveal email</span><b aria-hidden="true">↗</b>
     </button>
     {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer">{profile.label}<span>↗</span></a>)}
-    {site.cv.published && <a href={assetHref("/CV.pdf")} target="_blank" rel="noopener noreferrer">Curriculum vitae<span>↓</span></a>}
+    {site.cv.published && <a href={assetHref(Astro.url.pathname, `/${site.cv.path}`)} target="_blank" rel="noopener noreferrer">Curriculum vitae<span>↓</span></a>}
   </div>
   <div class="footnote"><span>© {new Date().getFullYear()} {site.name}</span><span>{site.location} · {site.availability}</span></div>
 </footer>

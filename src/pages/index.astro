@@ -8,7 +8,7 @@ import { assetHref } from "../lib/assetHref";
   <section class="about-hero shell">
     <div class="portrait-wrap">
       <div class="portrait">
-        <img src={assetHref("/bird-photo.jpg")} alt="Christopher Fillmore" decoding="async" />
+        <img src={assetHref(Astro.url.pathname, "/bird-photo.jpg")} alt="Christopher Fillmore" decoding="async" />
       </div>
       <p>{site.location}</p>
     </div>
@@ -31,7 +31,7 @@ import { assetHref } from "../lib/assetHref";
           <i>↗</i>
         </button>
         {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer"><span>{profile.label}</span><b>Profile</b><i>↗</i></a>)}
-        <a href={assetHref("/CV.pdf")} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
+        <a href={assetHref(Astro.url.pathname, `/${site.cv.path}`)} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
       </nav>
     </div>
   </section>
@@ -43,8 +43,8 @@ import { assetHref } from "../lib/assetHref";
 </BaseLayout>
 
 <style>
-  .about-hero { min-height: calc(100svh - 94px); display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: clamp(48px, 9vw, 140px); align-items: center; padding-block: clamp(70px, 10vw, 130px); }
-  .portrait-wrap { align-self: start; padding-top: 38px; }
+  .about-hero { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: clamp(48px, 9vw, 140px); align-items: center; padding-block: clamp(28px, 4vw, 48px); }
+  .portrait-wrap { align-self: center; }
   .portrait { width: 100%; aspect-ratio: 3/4; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 42% top; }
   .portrait-wrap > p { margin-top: 14px; color: var(--dim); font: .65rem var(--mono); text-transform: uppercase; letter-spacing: .09em; }
@@ -61,8 +61,7 @@ import { assetHref } from "../lib/assetHref";
   .timeline span, .timeline em { color: var(--muted); font: normal .75rem var(--mono); }
   .timeline strong { font-weight: 500; }
   @media (max-width: 720px) {
-    .about-hero { min-height: auto; grid-template-columns: 1fr; gap: 48px; }
-    .portrait-wrap { padding-top: 0; }
+    .about-hero { grid-template-columns: 1fr; gap: 48px; }
     .portrait { width: min(70vw, 300px); }
     h1 { font-size: clamp(4rem, 20vw, 6.4rem); }
     .profile-links { grid-template-columns: 1fr; }
