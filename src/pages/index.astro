@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import { assetHref } from "../lib/assetHref";
+---
+
+<BaseLayout title="About me" description={site.description}>
+  <section class="about-hero shell">
+    <div class="portrait-wrap">
+      <div class="portrait">
+        <img src={assetHref("/bird-photo.jpg")} alt="Christopher Fillmore" decoding="async" />
+      </div>
+      <p>{site.location}</p>
+    </div>
+
+    <div class="introduction">
+      <p class="eyebrow">About me</p>
+      <h1>Chris<br /><em>Fillmore</em></h1>
+      <p class="lede">I’m a software engineer and mathematician working where computational topology, geometry, and reliable software meet.</p>
+      <p>I completed my Ph.D. at the Institute of Science and Technology Austria. My thesis, <em>Braiding Geometry and Topology to Study Shapes and Data</em>, explored skeletal representations, persistence vineyards, and topological approaches to electrostatic equilibria. I now bring that mathematical perspective to practical engineering systems.</p>
+
+      <nav class="profile-links" aria-label="Contact and profile links">
+        <button
+          id="email-reveal"
+          type="button"
+          data-local={JSON.stringify(site.email.local)}
+          data-domain={JSON.stringify(site.email.domain)}
+        >
+          <span>Email</span>
+          <b>Reveal</b>
+          <i>↗</i>
+        </button>
+        {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer"><span>{profile.label}</span><b>Profile</b><i>↗</i></a>)}
+        <a href={assetHref("/CV.pdf")} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section shell timeline-section">
+    <div class="section-heading"><p class="eyebrow">Experience</p><h2>A path through research and software.</h2></div>
+    <div class="timeline">{site.timeline.map((item) => <div><span>{item.period}</span><strong>{item.role}</strong><em>{item.place}</em></div>)}</div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero { min-height: calc(100svh - 94px); display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: clamp(48px, 9vw, 140px); align-items: center; padding-block: clamp(70px, 10vw, 130px); }
+  .portrait-wrap { align-self: start; padding-top: 38px; }
+  .portrait { width: 100%; aspect-ratio: 3/4; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 42% top; }
+  .portrait-wrap > p { margin-top: 14px; color: var(--dim); font: .65rem var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+  h1 { margin: 24px 0 32px; font: 400 clamp(4.5rem, 9vw, 9rem)/.8 var(--serif); letter-spacing: -.06em; }
+  h1 em { color: var(--green); font-weight: 400; }
+  .introduction > p:not(.eyebrow) { max-width: 760px; }
+  .introduction > p:not(.eyebrow):not(.lede) { color: var(--muted); }
+  .profile-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 34px; margin-top: 48px; border-top: 1px solid var(--line); }
+  .profile-links a, .profile-links button { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 15px 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: inherit; cursor: pointer; font: inherit; text-align: left; }
+  .profile-links b { color: var(--muted); font-weight: 400; font-size: .68rem; }
+  .profile-links i { color: var(--green); font-style: normal; }
+  .timeline { border-top: 1px solid var(--line); }
+  .timeline div { display: grid; grid-template-columns: 1fr 2fr 2fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .timeline span, .timeline em { color: var(--muted); font: normal .75rem var(--mono); }
+  .timeline strong { font-weight: 500; }
+  @media (max-width: 720px) {
+    .about-hero { min-height: auto; grid-template-columns: 1fr; gap: 48px; }
+    .portrait-wrap { padding-top: 0; }
+    .portrait { width: min(70vw, 300px); }
+    h1 { font-size: clamp(4rem, 20vw, 6.4rem); }
+    .profile-links { grid-template-columns: 1fr; }
+    .timeline div { grid-template-columns: 1fr; gap: 5px; }
+  }
+</style>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#email-reveal");
+  button?.addEventListener("click", async () => {
+    const decode = (value: string | undefined) => JSON.parse(value ?? "[]").map((n: number) => String.fromCharCode(n)).join("");
+    const email = `${decode(button.dataset.local)}@${decode(button.dataset.domain)}`;
+    const label = button.querySelector("b");
+    if (label) label.textContent = "Copy";
+    button.setAttribute("aria-label", `Copy ${email}`);
+    try {
+      await navigator.clipboard.writeText(email);
+      if (label) label.textContent = "Copied";
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  });
+</script>

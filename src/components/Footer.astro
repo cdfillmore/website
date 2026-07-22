@@ -1,0 +1,41 @@
+---
+import { site } from "../data/site";
+import { assetHref } from "../lib/assetHref";
+---
+<footer id="contact" class="footer shell">
+  <div>
+    <p class="eyebrow">Contact / collaboration</p>
+    <h2>Let’s make difficult ideas <em>work.</em></h2>
+  </div>
+  <div class="links">
+    <button id="email-reveal" data-local={JSON.stringify(site.email.local)} data-domain={JSON.stringify(site.email.domain)}>
+      <span>Reveal email</span><b aria-hidden="true">↗</b>
+    </button>
+    {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer">{profile.label}<span>↗</span></a>)}
+    {site.cv.published && <a href={assetHref("/CV.pdf")} target="_blank" rel="noopener noreferrer">Curriculum vitae<span>↓</span></a>}
+  </div>
+  <div class="footnote"><span>© {new Date().getFullYear()} {site.name}</span><span>{site.location} · {site.availability}</span></div>
+</footer>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#email-reveal");
+  button?.addEventListener("click", async () => {
+    const decode = (value: string | undefined) => JSON.parse(value ?? "[]").map((n: number) => String.fromCharCode(n)).join("");
+    const email = `${decode(button.dataset.local)}@${decode(button.dataset.domain)}`;
+    const label = button.querySelector("span");
+    if (label) label.textContent = email;
+    button.setAttribute("aria-label", `Copy ${email}`);
+    try { await navigator.clipboard.writeText(email); if (label) label.textContent = `${email} — copied`; } catch { window.location.href = `mailto:${email}`; }
+  });
+</script>
+
+<style>
+  .footer { padding-block: clamp(80px, 12vw, 160px) 34px; display: grid; grid-template-columns: 2fr 1fr; gap: 70px; }
+  h2 { max-width: 760px; margin: 24px 0 0; font: 400 clamp(3.2rem, 7vw, 7.2rem)/.9 var(--serif); letter-spacing: -.05em; }
+  h2 em { color: var(--green); font-weight: 400; }
+  .links { align-self: end; display: flex; flex-direction: column; }
+  .links a, .links button { display: flex; justify-content: space-between; width: 100%; padding: 15px 0; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); background: none; cursor: pointer; text-align: left; font-size: .8rem; }
+  .links span, .links b { color: var(--green); font-weight: 400; }
+  .footnote { grid-column: 1/-1; display: flex; justify-content: space-between; margin-top: 90px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--dim); font: .63rem var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+  @media (max-width: 720px) { .footer { grid-template-columns: 1fr; gap: 50px; } .footnote { margin-top: 30px; flex-direction: column; gap: 8px; } }
+</style>

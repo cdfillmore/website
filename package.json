@@ -1,0 +1,24 @@
+{
+  "name": "personal-geometry-portfolio",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:poll": "CHOKIDAR_USEPOLLING=true CHOKIDAR_INTERVAL=250 astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.4",
+    "@astrojs/markdown-remark": "^7.2.1",
+    "astro": "^7.1.1",
+    "katex": "^0.18.1",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "typescript": "5.8.3"
+  }
+}

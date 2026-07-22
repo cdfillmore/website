@@ -1,0 +1,9 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { assetHref } from "../lib/assetHref";
+const talks=(await getCollection("talks")).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+const format=new Intl.DateTimeFormat("en",{month:"short",year:"numeric"});
+---
+<BaseLayout title="Talks" description="Selected lectures, seminars, and conference talks."><section class="shell section"><div class="section-heading"><p class="eyebrow">Talks / lectures</p><h2>Ideas are sharper when shared.</h2></div><div class="list">{talks.map((talk)=><article><time datetime={talk.data.date.toISOString()}>{format.format(talk.data.date)}</time><div><h3>{talk.data.title}</h3><p>{talk.data.summary}</p><span>{talk.data.venue} · {talk.data.location}</span></div><div class="links">{talk.data.event&&<a href={talk.data.event}>Event ↗</a>}{talk.data.slides&&<a href={assetHref(talk.data.slides)} target="_blank" rel="noopener noreferrer">Slides ↗</a>}{talk.data.recording&&<a href={assetHref(talk.data.recording)} target="_blank" rel="noopener noreferrer">Watch ↗</a>}</div></article>)}</div></section></BaseLayout>
+<style>.list{border-top:1px solid var(--line)}article{display:grid;grid-template-columns:140px 1fr auto;gap:30px;padding:35px 0;border-bottom:1px solid var(--line)}time,article span{color:var(--muted);font:.68rem var(--mono)}h3{margin:0;font:400 clamp(1.8rem,3vw,3rem)/1.1 var(--serif)}article p{max-width:680px;color:var(--muted)}.links{display:flex;gap:16px;color:var(--green);font-size:.7rem}@media(max-width:720px){article{grid-template-columns:1fr}}</style>

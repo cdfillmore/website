@@ -1,0 +1,17 @@
+---
+interface Props { title: string; summary: string; category: string; technologies: string[]; href: string; index?: number; }
+const { title, summary, category, technologies, href, index = 1 } = Astro.props;
+---
+<article class="card">
+  <a href={href} aria-label={`Read about ${title}`}><span class="num">0{index}</span><span class="kind">{category}</span><h3>{title}</h3><p>{summary}</p><div class="tags">{technologies.map((item) => <span class="tag">{item}</span>)}</div><span class="open">View case study ↗</span></a>
+</article>
+<style>
+  .card { border-top: 1px solid var(--line); }
+  a { display: grid; grid-template-columns: 70px 1fr 2fr; gap: 24px; min-height: 260px; padding: 35px 0; }
+  .num, .kind { color: var(--dim); font: .65rem var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+  h3 { grid-column: 2; margin: 22px 0 0; font: 400 clamp(2rem, 4vw, 4rem)/1 var(--serif); letter-spacing: -.03em; }
+  p { max-width: 540px; margin: 22px 0 0; color: var(--muted); }
+  .tags { grid-column: 3; align-self: end; }
+  .open { grid-column: 3; align-self: end; justify-self: end; color: var(--green); font-size: .72rem; }
+  @media (max-width: 720px) { a { grid-template-columns: 42px 1fr; min-height: 0; } h3 { grid-column: 1/-1; } p, .tags, .open { grid-column: 2; justify-self: start; } }
+</style>

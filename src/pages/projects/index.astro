@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { site } from "../../data/site";
+
+const projects = (await getCollection("projects")).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Work & Research" description="Software engineering, computational topology, geometry, and research tools.">
+  <section class="shell section">
+    <div class="section-heading"><p class="eyebrow">Work & Research</p><h2>Engineering rigor meets mathematical curiosity.</h2></div>
+    <p class="lede intro">My work sits between topology, discrete geometry, algorithm design, and software engineering. I’m interested in representations that preserve meaningful structure and systems that make those ideas testable.</p>
+    <div class="themes">
+      {site.researchThemes.map((theme) => <article><span>{theme.number}</span><h3>{theme.title}</h3><p>{theme.text}</p></article>)}
+    </div>
+  </section>
+
+  <section class="shell section archive">
+    <div class="section-heading"><p class="eyebrow">Selected work</p><h2>Software, algorithms, and research tools.</h2></div>
+    {projects.map((project, i) => <ProjectCard index={i+1} title={project.data.title} summary={project.data.summary} category={project.data.category} technologies={project.data.technologies} href={`${import.meta.env.BASE_URL}projects/${project.id}/`} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .intro { margin: 0 0 70px 25%; }
+  .themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .themes article { min-height: 290px; padding: 30px; background: var(--ground); }
+  .themes span { color: var(--green); font: .65rem var(--mono); }
+  .themes h3 { margin: 76px 0 15px; font: 400 1.65rem var(--serif); }
+  .themes p { color: var(--muted); font-size: .9rem; }
+  @media (max-width: 720px) { .intro { margin-left: 0; } .themes { grid-template-columns: 1fr; } .themes article { min-height: 220px; } .themes h3 { margin-top: 50px; } }
+</style>

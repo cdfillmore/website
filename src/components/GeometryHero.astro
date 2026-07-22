@@ -1,0 +1,55 @@
+<div class="geometry" data-geometry aria-hidden="true">
+  <svg viewBox="0 0 700 620" role="presentation">
+    <defs>
+      <radialGradient id="halo"><stop stop-color="#75f0a7" stop-opacity=".18"/><stop offset="1" stop-color="#75f0a7" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle class="halo" cx="365" cy="310" r="260" fill="url(#halo)" />
+    <g class="mesh">
+      <path d="M105 355 191 111 370 65 576 178 619 416 442 554 208 520Z" />
+      <path d="m105 355 212-70 53-220 48 247 158-134M317 285l125 269m-24-242 201 104M317 285 208 520m109-235L191 111m227 201L208 520m0 0 411-104M191 111l227 201" />
+      <path class="face" d="m191 111 126 174 53-220Z" />
+      <path class="face face-b" d="m317 285 101 27 24 242-234-34Z" />
+    </g>
+    <g class="axis">
+      <path d="M192 359 C257 310 271 235 336 281 S421 397 502 329" />
+      <circle cx="192" cy="359" r="8"/><circle cx="336" cy="281" r="10"/><circle cx="502" cy="329" r="8"/>
+      <circle class="sphere" cx="336" cy="281" r="63" />
+    </g>
+    <g class="vertices">
+      <circle cx="105" cy="355" r="4"/><circle cx="191" cy="111" r="4"/><circle cx="370" cy="65" r="4"/><circle cx="576" cy="178" r="4"/><circle cx="619" cy="416" r="4"/><circle cx="442" cy="554" r="4"/><circle cx="208" cy="520" r="4"/><circle cx="317" cy="285" r="4"/><circle cx="418" cy="312" r="4"/>
+    </g>
+    <text x="20" y="594">CACHED CONFIGURATION 03 / MEDIAL AXIS</text>
+  </svg>
+</div>
+
+<script>
+  const graphic = document.querySelector<HTMLElement>("[data-geometry]");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+  if (graphic && !reduce && !coarse) {
+    graphic.addEventListener("pointermove", (event) => {
+      const rect = graphic.getBoundingClientRect();
+      graphic.style.setProperty("--rx", `${((event.clientY - rect.top) / rect.height - .5) * -5}deg`);
+      graphic.style.setProperty("--ry", `${((event.clientX - rect.left) / rect.width - .5) * 7}deg`);
+      graphic.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      graphic.style.setProperty("--my", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    });
+    graphic.addEventListener("pointerleave", () => {
+      graphic.style.setProperty("--rx", "0deg"); graphic.style.setProperty("--ry", "0deg");
+    });
+  }
+</script>
+
+<style>
+  .geometry { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; position: relative; perspective: 900px; }
+  .geometry::after { content: ""; position: absolute; inset: 8%; opacity: .25; pointer-events: none; background: radial-gradient(circle at var(--mx) var(--my), #75f0a722, transparent 30%); }
+  svg { width: 100%; height: auto; overflow: visible; transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .mesh { fill: none; stroke: #68716a; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .mesh .face { fill: #75f0a7; fill-opacity: .035; stroke: #75f0a7; stroke-opacity: .24; }
+  .mesh .face-b { fill-opacity: .06; }
+  .vertices { fill: #b3bab4; }
+  .axis { fill: #75f0a7; stroke: #75f0a7; stroke-width: 2; }
+  .axis .sphere { fill: none; stroke-width: 1; stroke-dasharray: 4 7; opacity: .55; }
+  text { fill: #68716a; font: 11px var(--mono); letter-spacing: .08em; }
+  @media (max-width: 720px) { text { display: none; } }
+</style>
