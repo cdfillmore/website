@@ -51,7 +51,25 @@ button { font: inherit; }
 
 @media (max-width: 720px) {
   :root { --page: min(100% - 20px, 1180px); }
-  body { font-size: 15px; line-height: 1.6; }
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+    background-image: none;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #000;
+    background-image: var(--penrose);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(1.45);
+    pointer-events: none;
+  }
   .section-heading { grid-template-columns: 1fr; gap: 18px; }
   .section { padding-block: 60px; }
   .lede { font-size: 1.02rem; line-height: 1.55; }
