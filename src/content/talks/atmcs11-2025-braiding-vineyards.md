@@ -6,6 +6,7 @@ location: "Bozeman, Montana, USA"
 summary: "A contributed talk on vineyard monodromy and the construction showing that arbitrary braids can be realised by persistence vineyards."
 event: "https://comptag.github.io/atmcs11/"
 slides: "/talks/braiding-vineyards-atmcs11-2025.pdf"
+image: "/talks/previews/braiding-vineyards-atmcs11-2025.png"
 featured: true
 ---
 

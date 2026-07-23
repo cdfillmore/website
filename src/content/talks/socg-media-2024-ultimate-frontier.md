@@ -7,6 +7,7 @@ summary: "A live media presentation visualising an optimality construction and t
 event: "https://computational-geometry.org/cg-week/media-exposition/2024/"
 slides: "https://doi.org/10.4230/LIPIcs.SoCG.2024.87"
 recording: "https://computational-geometry.org/old/SoCG-videos/socg24video/the-ultimate-frontier-an-optimality-construction-for-homotopy-inference.mp4"
+image: "/talks/previews/ultimate-frontier-socg-media-2024.png"
 featured: true
 ---
 

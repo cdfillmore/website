@@ -16,7 +16,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0a0d0b" />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -30,7 +30,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       url: Astro.site, jobTitle: site.title, sameAs: site.profiles.map((item) => item.href),
     })} />
   </head>
-  <body>
+  <body style={`--penrose: url('${import.meta.env.BASE_URL}penrose.svg')`}>
     <a class="skip" href="#content">Skip to content</a>
     <Header />
     <main id="content"><slot /></main>

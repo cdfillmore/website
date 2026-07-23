@@ -1,7 +1,27 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { assetHref } from "../../lib/assetHref";
 const entries = (await getCollection("publications")).sort((a,b) => b.data.year-a.data.year);
 ---
-<BaseLayout title="Publications" description="Publications in computational topology and geometry."><section class="shell section"><div class="section-heading"><p class="eyebrow">Publication archive</p><h2>Papers and preprints.</h2></div><div class="list">{entries.map((entry)=><article><span class="year">{entry.data.year}</span><div><p class="type">{entry.data.type}</p><h3><a href={`${import.meta.env.BASE_URL}publications/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.authors.join(", ")}</p><em>{entry.data.venue}</em></div><div class="external">{entry.data.doi&&<a href={entry.data.doi}>DOI ↗</a>}{entry.data.arxiv&&<a href={entry.data.arxiv}>arXiv ↗</a>}{entry.data.url&&<a href={entry.data.url}>HAL ↗</a>}</div></article>)}</div></section></BaseLayout>
-<style>.list{border-top:1px solid var(--line)}article{display:grid;grid-template-columns:110px 1fr auto;gap:30px;padding:38px 0;border-bottom:1px solid var(--line)}.year,.type{color:var(--green);font:.66rem var(--mono);text-transform:uppercase;letter-spacing:.08em}h3{max-width:780px;margin:10px 0;font:400 clamp(1.7rem,3vw,3rem)/1.05 var(--serif)}article p:not(.type),article em{color:var(--muted);font-size:.83rem}.external{display:flex;flex-direction:column;gap:10px;font-size:.7rem}@media(max-width:720px){article{grid-template-columns:1fr}.external{flex-direction:row}}</style>
+<BaseLayout title="Publications" description="Publications in computational topology and geometry."><section class="shell section"><div class="section-heading"><p class="eyebrow">Publication archive</p><h2>Papers and preprints.</h2></div><div class="list">{entries.map((entry)=><article class:list={{ "has-image": Boolean(entry.data.image) }}><span class="year">{entry.data.year}</span><div><p class="type">{entry.data.type}</p><h3><a href={`${import.meta.env.BASE_URL}publications/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.authors.join(", ")}</p><em>{entry.data.venue}</em></div>{entry.data.image && <div class="thumb"><img src={assetHref(Astro.url.pathname, entry.data.image)} alt="" decoding="async" /></div>}<div class="external">{entry.data.doi&&<a href={entry.data.doi}>DOI ↗</a>}{entry.data.arxiv&&<a href={entry.data.arxiv}>arXiv ↗</a>}{entry.data.url&&<a href={entry.data.url}>HAL ↗</a>}</div></article>)}</div></section></BaseLayout>
+<style>
+  .list { border-top: 1px solid var(--line); }
+  article { display: grid; grid-template-columns: 110px 1fr auto; gap: 30px; padding: 38px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  article.has-image { grid-template-columns: 110px 1fr minmax(120px, 180px) auto; }
+  .year { color: var(--ink); font: .66rem var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+  .type { color: var(--green); font: .66rem var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+  h3 { max-width: 780px; margin: 10px 0; font: 400 clamp(1.7rem, 3vw, 3rem)/1.05 var(--serif); }
+  article p:not(.type), article em { color: var(--muted); font-size: .83rem; }
+  .thumb { border: 1px solid var(--line); background: var(--surface); overflow: hidden; aspect-ratio: 1; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .external { display: flex; flex-direction: column; gap: 10px; font-size: .7rem; align-self: center; color: var(--ink); }
+  .external a:hover { color: var(--green); }
+  @media (max-width: 720px) {
+    article, article.has-image { grid-template-columns: 1fr; gap: 10px; padding: 26px 0; }
+    .thumb { max-width: 220px; }
+    .external { flex-direction: row; flex-wrap: wrap; gap: 12px 16px; }
+    h3 { margin: 8px 0 6px; font-size: 1.5rem; }
+    article p:not(.type), article em { font-size: .78rem; }
+  }
+</style>

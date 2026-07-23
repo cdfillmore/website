@@ -13,5 +13,11 @@ const { title, summary, category, technologies, href, index = 1 } = Astro.props;
   p { max-width: 540px; margin: 22px 0 0; color: var(--muted); }
   .tags { grid-column: 3; align-self: end; }
   .open { grid-column: 3; align-self: end; justify-self: end; color: var(--green); font-size: .72rem; }
-  @media (max-width: 720px) { a { grid-template-columns: 42px 1fr; min-height: 0; } h3 { grid-column: 1/-1; } p, .tags, .open { grid-column: 2; justify-self: start; } }
+  @media (max-width: 720px) {
+    a { grid-template-columns: 1fr; min-height: 0; gap: 14px; padding: 22px 0 26px; }
+    h3 { grid-column: 1; margin-top: 0; font-size: clamp(1.5rem, 8vw, 2.3rem); }
+    p, .tags, .open { grid-column: 1; justify-self: start; }
+    .tags { margin-top: 10px; }
+    .open { margin-top: 2px; }
+  }
 </style>

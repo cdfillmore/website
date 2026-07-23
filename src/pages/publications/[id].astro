@@ -5,4 +5,27 @@ export async function getStaticPaths(){return (await getCollection("publications
 const {entry}=Astro.props; const {Content}=await render(entry);
 ---
 <BaseLayout title={entry.data.title}><article class="paper shell"><a href={`${import.meta.env.BASE_URL}publications/`}>← Publications</a><p class="eyebrow">{entry.data.type} / {entry.data.year}</p><h1>{entry.data.title}</h1><p class="authors">{entry.data.authors.join(" · ")}</p><p class="venue">{entry.data.venue}</p><div class="links">{entry.data.doi&&<a href={entry.data.doi}>DOI ↗</a>}{entry.data.arxiv&&<a href={entry.data.arxiv}>arXiv ↗</a>}{entry.data.project&&<a href={entry.data.project}>Project ↗</a>}{entry.data.url&&<a href={entry.data.url}>HAL ↗</a>}</div><section><h2>Abstract</h2><Content /></section></article></BaseLayout>
-<style>.paper{padding-block:70px 140px}.paper>a{color:var(--muted);font-size:.75rem}.eyebrow{margin-top:80px}h1{max-width:1050px;margin:25px 0;font:400 clamp(3.4rem,7vw,7rem)/.92 var(--serif);letter-spacing:-.04em}.authors,.venue{color:var(--muted)}.links{display:flex;gap:25px;margin-top:35px;color:var(--green);font-size:.75rem}.paper section{max-width:760px;margin:110px auto 0;border-top:1px solid var(--line);padding-top:35px}.paper h2{font:400 2rem var(--serif)}.paper section :global(p){color:#c2c6c3}.references{margin-top:50px;padding-top:25px;border-top:1px solid var(--line)}.references h3{margin:0 0 18px;font:400 1.2rem var(--serif)}.references ul{margin:0;padding-left:18px}.references li{margin:0 0 12px;color:var(--muted)}.references a{color:var(--green)}@media(max-width:720px){.paper section{margin-top:70px}}</style>
+<style>
+  .paper { padding-block: 70px 140px; }
+  .paper > a { color: var(--muted); font-size: .75rem; }
+  .eyebrow { margin-top: 80px; }
+  h1 { max-width: 1050px; margin: 25px 0; font: 400 clamp(3.4rem, 7vw, 7rem)/.92 var(--serif); letter-spacing: -.04em; }
+  .authors, .venue { color: var(--muted); }
+  .links { display: flex; gap: 25px; margin-top: 35px; color: var(--green); font-size: .75rem; }
+  .paper section { max-width: 760px; margin: 110px auto 0; border-top: 1px solid var(--line); padding-top: 35px; }
+  .paper h2 { font: 400 2rem var(--serif); }
+  .paper section :global(p) { color: #c2c6c3; }
+  .references { margin-top: 50px; padding-top: 25px; border-top: 1px solid var(--line); }
+  .references h3 { margin: 0 0 18px; font: 400 1.2rem var(--serif); }
+  .references ul { margin: 0; padding-left: 18px; }
+  .references li { margin: 0 0 12px; color: var(--muted); }
+  .references a { color: var(--green); }
+  @media (max-width: 720px) {
+    .paper { padding-block: 42px 100px; }
+    .eyebrow { margin-top: 48px; }
+    h1 { margin: 18px 0; font-size: clamp(2.5rem, 12vw, 4rem); }
+    .links { gap: 12px 18px; flex-wrap: wrap; margin-top: 24px; }
+    .paper section { margin-top: 56px; padding-top: 24px; }
+    .paper h2 { font-size: 1.55rem; }
+  }
+</style>

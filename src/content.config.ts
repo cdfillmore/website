@@ -34,6 +34,7 @@ const publications = defineCollection({
     arxiv: link,
     project: link,
     url: link,
+    image: z.string().optional(),
     featured: z.boolean().default(false),
   }),
 });
@@ -49,6 +50,7 @@ const talks = defineCollection({
     event: link,
     slides: resourceLink,
     recording: resourceLink,
+    image: z.string().optional(),
     featured: z.boolean().default(false),
   }),
 });

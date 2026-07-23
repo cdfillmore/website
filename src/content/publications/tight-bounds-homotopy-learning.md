@@ -7,6 +7,7 @@ type: "conference"
 featured: true
 doi: "https://doi.org/10.4230/LIPIcs.SoCG.2024.11"
 arxiv: "https://arxiv.org/abs/2206.10485"
+image: "/A-pictorial-overview-of-the-proof.png"
 ---
 
 In this article we extend and strengthen the seminal work by Niyogi, Smale, and Weinberger on the learning of the homotopy type from a sample of an underlying space. In their work, Niyogi, Smale, and Weinberger studied samples of C² manifolds with positive reach embedded in $\mathbb{R}^d$. We extend their results in the following ways:

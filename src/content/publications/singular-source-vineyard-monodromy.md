@@ -6,6 +6,7 @@ year: 2026
 type: "preprint"
 featured: true
 arxiv: "https://arxiv.org/abs/2607.01046"
+image: "/focal_symmetry1_og.png"
 ---
 
 Vineyards, or time-varying families of persistence diagrams, are widely used in topological data analysis (TDA) pipelines to track how topological features change and evolve as a parameter varies. When the parameter traces a closed loop, a vineyard can exhibit monodromy: diagram points permute over the course of a full traversal, which obstructs feature tracking and can complicate downstream analysis of such data. Chambers et al. considered the periodic vineyards that arise from the radial persistence transform, which maps the manifold to a family of persistence diagrams, where each diagram fixes a base point and considers the filtration that is based on Euclidean distance to that point, and showed that monodromy and knotting can occur. Other recent work by Arya et al. considers geometric conditions that exclude monodromy in two dimensions, in an effort to better understand when this effect happens. That said, understanding when and why monodromy occurs is a fundamental open problem with direct practical consequences for many data analysis pipelines.

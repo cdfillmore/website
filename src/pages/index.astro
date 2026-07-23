@@ -16,7 +16,7 @@ import { assetHref } from "../lib/assetHref";
     <div class="introduction">
       <p class="eyebrow">About me</p>
       <h1>Chris<br /><em>Fillmore</em></h1>
-      <p class="lede">I’m a Mathematician turned software engineer currently working at Snap Spectacles in Vienna.  My background is in computational topology, geometry.</p>
+      <p class="lede">I’m a mathematician turned software engineer currently working at Snap Spectacles in Vienna.  My background is in computational topology & geometry.</p>
       <p>I completed my Ph.D. at the Institute of Science and Technology Austria. My thesis, <em>Braiding Geometry and Topology to Study Shapes and Data</em>, explored skeletal representations, persistence vineyards, and topological approaches to electrostatic equilibria. I now bring that mathematical perspective to practical engineering systems.</p>
 
       <nav class="profile-links" aria-label="Contact and profile links">
@@ -34,6 +34,11 @@ import { assetHref } from "../lib/assetHref";
         <a href={assetHref(Astro.url.pathname, `/${site.cv.path}`)} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
       </nav>
     </div>
+  </section>
+
+  <section class="bunny-pair shell" aria-label="Geometric bunny figures">
+    <img src={assetHref(Astro.url.pathname, "/stan-bunny-input.png")} alt="Input bunny mesh" decoding="async" />
+    <img src={assetHref(Astro.url.pathname, "/stan-bunny-dela.png")} alt="Delaunay bunny mesh" decoding="async" />
   </section>
 
   <section class="section shell timeline-section">
@@ -56,16 +61,22 @@ import { assetHref } from "../lib/assetHref";
   .profile-links a, .profile-links button { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 15px 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: inherit; cursor: pointer; font: inherit; text-align: left; }
   .profile-links b { color: var(--muted); font-weight: 400; font-size: .68rem; }
   .profile-links i { color: var(--green); font-style: normal; }
+  .bunny-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; width: 70%; margin-inline: auto; padding-block: clamp(28px, 5vw, 56px); }
+  .bunny-pair img { width: 100%; min-width: 0; aspect-ratio: 1; object-fit: cover; }
   .timeline { border-top: 1px solid var(--line); }
   .timeline div { display: grid; grid-template-columns: 1fr 2fr 2fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
   .timeline span, .timeline em { color: var(--muted); font: normal .75rem var(--mono); }
   .timeline strong { font-weight: 500; }
   @media (max-width: 720px) {
-    .about-hero { grid-template-columns: 1fr; gap: 48px; }
-    .portrait { width: min(70vw, 300px); }
-    h1 { font-size: clamp(4rem, 20vw, 6.4rem); }
+    .about-hero { grid-template-columns: 1fr; gap: 32px; padding-block: 22px 6px; }
+    .portrait-wrap { max-width: 320px; }
+    .portrait { width: min(82vw, 320px); }
+    h1 { margin: 16px 0 22px; font-size: clamp(3.6rem, 18vw, 5.8rem); }
+    .introduction > p:not(.eyebrow) { max-width: 100%; }
     .profile-links { grid-template-columns: 1fr; }
-    .timeline div { grid-template-columns: 1fr; gap: 5px; }
+    .profile-links a, .profile-links button { padding: 14px 0; }
+    .bunny-pair { padding-block: 20px 8px; }
+    .timeline div { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
   }
 </style>
 

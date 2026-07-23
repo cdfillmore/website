@@ -21,9 +21,11 @@ const isActive = (itemHref: string) => itemHref === "/" ? path === "/" : path.st
   nav a { color: var(--muted); font-size: .74rem; letter-spacing: .04em; }
   nav a.active { color: var(--ink); }
   @media (max-width: 720px) {
-    .header { min-height: 76px; gap: 18px; }
-    nav { justify-content: flex-end; gap: 14px; }
-    nav a { font-size: .62rem; }
+    .header { min-height: 72px; gap: 12px; align-items: end; padding-block: 10px 8px; }
+    nav { justify-content: flex-start; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; -ms-overflow-style: none; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: .62rem; white-space: nowrap; }
+    nav a.active { border-color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); }
   }
-  @media (max-width: 480px) { .mark { display: none; } .header { grid-template-columns: 1fr; } nav { justify-content: space-between; gap: 8px; } }
+  @media (max-width: 480px) { .mark { display: none; } .header { grid-template-columns: 1fr; } nav { width: 100%; } }
 </style>
