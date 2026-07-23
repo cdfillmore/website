@@ -65,6 +65,8 @@ import { assetHref } from "../lib/assetHref";
   .introduction > p:not(.lede) { color: var(--muted); }
   .profile-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 34px; margin-top: 48px; border-top: 1px solid var(--line); }
   .profile-links a, .profile-links button { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 15px 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: inherit; cursor: pointer; font: inherit; text-align: left; }
+  .profile-links a:hover, .profile-links button:hover { color: var(--green); }
+  .profile-links a:hover b, .profile-links button:hover b { color: var(--green); }
   .profile-links b { color: var(--muted); font-weight: 400; font-size: .68rem; }
   .profile-links i { color: var(--green); font-style: normal; }
   .bunny-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; width: 70%; margin-inline: auto; padding-block: clamp(28px, 5vw, 56px); }
