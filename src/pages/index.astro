@@ -5,34 +5,38 @@ import { assetHref } from "../lib/assetHref";
 ---
 
 <BaseLayout title="About me" description={site.description}>
-  <section class="about-hero shell">
-    <div class="portrait-wrap">
-      <div class="portrait">
-        <img src={assetHref(Astro.url.pathname, "/bird-photo.jpg")} alt="Christopher Fillmore" decoding="async" />
-      </div>
-      <p>{site.location}</p>
-    </div>
-
-    <div class="introduction">
+  <section class="shell about-page">
+    <div class="section-heading">
       <p class="eyebrow">About me</p>
-      <h1>Chris<br /><em>Fillmore</em></h1>
-      <p class="lede">I’m a mathematician turned software engineer currently working at Snap Spectacles in Vienna.  My background is in computational topology & geometry.</p>
-      <p>I completed my Ph.D. at the Institute of Science and Technology Austria. My thesis, <em>Braiding Geometry and Topology to Study Shapes and Data</em>, explored skeletal representations, persistence vineyards, and topological approaches to electrostatic equilibria. I now bring that mathematical perspective to practical engineering systems.</p>
+    </div>
+    <div class="about-hero">
+      <div class="portrait-wrap">
+        <div class="portrait">
+          <img src={assetHref(Astro.url.pathname, "/bird-photo.jpg")} alt="Christopher Fillmore" decoding="async" />
+        </div>
+        <p>{site.location}</p>
+      </div>
 
-      <nav class="profile-links" aria-label="Contact and profile links">
-        <button
-          id="email-reveal"
-          type="button"
-          data-local={JSON.stringify(site.email.local)}
-          data-domain={JSON.stringify(site.email.domain)}
-        >
-          <span>Email</span>
-          <b>Reveal</b>
-          <i>↗</i>
-        </button>
-        {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer"><span>{profile.label}</span><b>Profile</b><i>↗</i></a>)}
-        <a href={assetHref(Astro.url.pathname, `/${site.cv.path}`)} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
-      </nav>
+      <div class="introduction">
+        <h1>Chris<br /><em>Fillmore</em></h1>
+        <p class="lede">I’m a mathematician turned software engineer currently working at Snap Spectacles in Vienna.  My background is in computational topology & geometry.</p>
+        <p>I completed my Ph.D. at the Institute of Science and Technology Austria. My thesis, <em>Braiding Geometry and Topology to Study Shapes and Data</em>, explored skeletal representations, persistence vineyards, and topological approaches to electrostatic equilibria. I now bring that mathematical perspective to practical engineering systems.</p>
+
+        <nav class="profile-links" aria-label="Contact and profile links">
+          <button
+            id="email-reveal"
+            type="button"
+            data-local={JSON.stringify(site.email.local)}
+            data-domain={JSON.stringify(site.email.domain)}
+          >
+            <span>Email</span>
+            <b>Reveal</b>
+            <i>↗</i>
+          </button>
+          {site.profiles.map((profile) => <a href={profile.href} target="_blank" rel="me noreferrer"><span>{profile.label}</span><b>Profile</b><i>↗</i></a>)}
+          <a href={assetHref(Astro.url.pathname, `/${site.cv.path}`)} target="_blank" rel="noopener noreferrer"><span>Curriculum vitae</span><b>PDF</b><i>↓</i></a>
+        </nav>
+      </div>
     </div>
   </section>
 
@@ -48,15 +52,17 @@ import { assetHref } from "../lib/assetHref";
 </BaseLayout>
 
 <style>
-  .about-hero { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: clamp(48px, 9vw, 140px); align-items: center; padding-block: clamp(28px, 4vw, 48px); }
+  .about-page { padding-block: clamp(28px, 4vw, 48px) 0; }
+  .about-page .section-heading { margin-bottom: clamp(28px, 4vw, 48px); }
+  .about-hero { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: clamp(48px, 9vw, 140px); align-items: center; }
   .portrait-wrap { align-self: center; }
   .portrait { width: 100%; aspect-ratio: 3/4; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 42% top; }
   .portrait-wrap > p { margin-top: 14px; color: var(--dim); font: .65rem var(--mono); text-transform: uppercase; letter-spacing: .09em; }
-  h1 { margin: 24px 0 32px; font: 400 clamp(4.5rem, 9vw, 9rem)/.8 var(--serif); letter-spacing: -.06em; }
+  h1 { margin: 0 0 32px; font: 400 clamp(4.5rem, 9vw, 9rem)/.8 var(--serif); letter-spacing: -.06em; }
   h1 em { color: var(--green); font-weight: 400; }
-  .introduction > p:not(.eyebrow) { max-width: 760px; }
-  .introduction > p:not(.eyebrow):not(.lede) { color: var(--muted); }
+  .introduction > p { max-width: 760px; }
+  .introduction > p:not(.lede) { color: var(--muted); }
   .profile-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 34px; margin-top: 48px; border-top: 1px solid var(--line); }
   .profile-links a, .profile-links button { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 15px 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: inherit; cursor: pointer; font: inherit; text-align: left; }
   .profile-links b { color: var(--muted); font-weight: 400; font-size: .68rem; }
@@ -68,11 +74,13 @@ import { assetHref } from "../lib/assetHref";
   .timeline span, .timeline em { color: var(--muted); font: normal .75rem var(--mono); }
   .timeline strong { font-weight: 500; }
   @media (max-width: 720px) {
-    .about-hero { grid-template-columns: 1fr; gap: 32px; padding-block: 22px 6px; }
+    .about-page { padding-block: 22px 0; }
+    .about-page .section-heading { margin-bottom: 22px; }
+    .about-hero { grid-template-columns: 1fr; gap: 32px; }
     .portrait-wrap { max-width: 320px; }
     .portrait { width: min(82vw, 320px); }
-    h1 { margin: 16px 0 22px; font-size: clamp(3.6rem, 18vw, 5.8rem); }
-    .introduction > p:not(.eyebrow) { max-width: 100%; }
+    h1 { margin: 0 0 22px; font-size: clamp(3.6rem, 18vw, 5.8rem); }
+    .introduction > p { max-width: 100%; }
     .profile-links { grid-template-columns: 1fr; }
     .profile-links a, .profile-links button { padding: 14px 0; }
     .bunny-pair { padding-block: 20px 8px; }
